@@ -1,0 +1,19 @@
+# User's private watchlist (contains personal manager choices)
+assets/manager-watchlist.json
+
+# Generated reports
+*.html
+reports/
+
+# WorkBuddy internal data
+.workbuddy/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS files
+.DS_Store
+Thumbs.db

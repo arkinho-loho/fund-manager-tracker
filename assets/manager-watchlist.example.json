@@ -1,0 +1,63 @@
+{
+  "version": "1.2",
+  "last_updated": "2026-06-27",
+  "description": "示例基金经理跟踪名单。将本文件复制为 manager-watchlist.json 后编辑，填入你要跟踪的基金经理。",
+  "managers": [
+    {
+      "name": "张坤",
+      "style_tags": ["价值", "消费"],
+      "style_group": "消费价值",
+      "company": "易方达基金",
+      "is_active": true,
+      "benchmark": "沪深300×50%+港股通×30%+中债×20%",
+      "benchmark_fund": [
+        {"code": "110011", "name": "易方达优质精选混合(QDII)", "tenure": "13年272天", "scope": "QDII", "is_solely_managed": true},
+        {"code": "118001", "name": "易方达亚洲精选股票(QDII)", "tenure": "~11年", "scope": "QDII", "is_solely_managed": true}
+      ],
+      "co_managed_funds": [
+        {"code": "005827", "name": "易方达蓝筹精选混合", "co_managers": 2}
+      ],
+      "notes": "双标杆QDII(110011+118001)，消费+港股+亚洲科技覆盖",
+      "watch_reason": "公募一哥，消费+价值投资标杆",
+      "priority": "high"
+    },
+    {
+      "name": "姜诚",
+      "style_tags": ["深度价值", "高安全边际"],
+      "style_group": "深度价值",
+      "company": "中泰资管",
+      "is_active": true,
+      "benchmark": "沪深300×60%+中债×40%",
+      "benchmark_fund": {
+        "code": "006567",
+        "name": "中泰星元灵活配置混合A",
+        "tenure": "7年203天",
+        "scope": "纯A股",
+        "is_solely_managed": true
+      },
+      "co_managed_funds": [],
+      "notes": "注意姜诚已升任中泰资管代总经理",
+      "watch_reason": "深度价值策略，高安全边际选股，含港股配置",
+      "priority": "high"
+    },
+    {
+      "name": "金梓才",
+      "style_tags": ["每一轮行情几乎都能抓住"],
+      "style_group": "AI产业链",
+      "company": "财通基金",
+      "is_active": true,
+      "benchmark": "沪深300×60%+中债×40%",
+      "benchmark_fund": {
+        "code": "720001",
+        "name": "财通价值动量混合A",
+        "tenure": "11年220天",
+        "scope": "纯A股",
+        "is_solely_managed": true
+      },
+      "co_managed_funds": [],
+      "notes": "近1年+401%，择时能力极强",
+      "watch_reason": "每一轮行情几乎都能抓住，AI产业链重仓",
+      "priority": "high"
+    }
+  ]
+}
