@@ -17,18 +17,24 @@
 - ✅ **风格分组展示** — AI 产业链/科技成长/消费价值/深度价值/周期/QDII 等
 - ✅ **业绩基准标注** — 每只标杆基金的对标指数一目了然
 - ✅ **Markdown 报告输出** — 可离线阅读、可版本控制的纯文本报告
+- ✅ **依赖自动安装** — 检测缺失 Skill，询问确认后自动从市场安装
 - ✅ **首次使用引导** — 交互式问答帮你快速建立自己的跟踪名单
 
 ## 快速开始
 
-### 前置依赖
+### 安装
 
-本 Skill 依赖以下数据源（需提前在 WorkBuddy 中安装）：
+在 WorkBuddy 中从 GitHub 安装本 Skill，或手动复制到: `~/.workbuddy/skills/fund-manager-tracker/`
 
-| 依赖 | 用途 |
-|------|------|
-| `neodata-financial-search` | 基金经理/持仓/排名（主力数据源） |
-| `hithink-fundmanager-selector` | 同花顺问财（交叉验证/补充业绩） |
+首次运行时，Skill 会自动检测缺失的依赖 Skill 并询问是否自动安装——你只需点"是"，无需手动搜索和安装。
+
+### 依赖 Skill（自动安装，无需手动操作）
+
+| 依赖 | 用途 | 是否必须 |
+|------|------|:--:|
+| `neodata-financial-search` | 基金经理/持仓/排名（主力数据源） | ✅ 必须 |
+| `hithink-fundmanager-selector` | 同花顺问财（交叉验证/补充业绩/条件筛选） | ⚠️ 推荐 |
+| `announcement-search` | 公告搜索（季报原文直达） | ○ 可选 |
 | `announcement-search` | 公告搜索（季报原文直达） |
 
 ### 安装

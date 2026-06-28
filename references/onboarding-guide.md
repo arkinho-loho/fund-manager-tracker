@@ -4,6 +4,25 @@
 
 ---
 
+## 引导前：依赖检测与自动安装
+
+```
+在开始之前，我先检查一下依赖 Skill 是否已安装...
+
+✅ neodata-financial-search — 已安装
+❌ hithink-fundmanager-selector — 未安装（用于同花顺问财条件筛选）
+❌ announcement-search — 未安装（用于季报公告原文提取）
+
+📦 是否可以自动帮你安装缺失的 2 个 Skill？（从 WorkBuddy 技能市场）
+    [是] —— 自动安装，约 10 秒
+    [跳过] —— 手动处理，相关功能会降级运行
+```
+
+**是 → 调用 `workbuddy_marketplace_skill` 依次安装 → 确认成功 → 进入 Q1**
+**跳过 → 标注降级功能 → 进入 Q1**
+
+---
+
 ## 引导对话脚本
 
 ### Q1: 确认模式

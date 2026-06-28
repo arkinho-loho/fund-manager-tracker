@@ -117,6 +117,41 @@ neodata(主力)          hithink-fundmanager-selector(问财)   announcement-sea
 | **业绩基准对比** | 基金基准收益率 | **超额收益** |
 | **业绩基准排名** | 基金各阶段同类排名(基准同类别) | **基准排名百分位** |
 
+### 依赖自动安装
+
+> 本 Skill 依赖 3 个外部数据源 Skill。首次运行时自动检测，未安装则询问用户是否自动安装。
+
+**检测逻辑**（Step 0 前置准备阶段）:
+
+```
+读取 SKILL.md 自身路径 → 推导 $SKILL_DIR
+搜索 $SKILL_DIR 同级的 Skill 目录:
+
+$SKILL_DIR/../neodata-financial-search/SKILL.md  → 已安装？✅
+$SKILL_DIR/../hithink-fundmanager-selector/SKILL.md → 已安装？✅
+$SKILL_DIR/../announcement-search/SKILL.md → 已安装？❌
+
+→ 发现缺失的: announcement-search
+→ 询问用户:
+    📦 检测到缺少依赖 Skill:
+    • announcement-search（公告搜索，用于季报原文提取）
+    
+    是否自动从 WorkBuddy 技能市场安装？（安装后立即生效）
+    [是 / 暂不安装，我手动处理]
+```
+
+**安装方式**: 调用内置工具 `workbuddy_marketplace_skill`，action="search" 搜索关键词 "announcement-search" → 返回 skillId → action="install" 安装。
+
+**降级策略**:
+
+| 缺失 Skill | 影响 | 降级方案 |
+|-----------|------|----------|
+| neodata-financial-search | 阻断 | **必须安装**，否则无法获取持仓/业绩数据 |
+| hithink-fundmanager-selector | 部分功能不可用 | 条件筛选和交叉验证降级，持仓/业绩照常 |
+| announcement-search | 观点提取降级 | L2 公告搜索不可用，直接跳到 L3 WebSearch |
+
+> 💡 用户始终可以手动安装：在 WorkBuddy 左侧"技能市场"搜索对应 Skill 名称即可。
+
 ## 三、触发与输入
 
 ### 触发词(口语识别)
@@ -144,7 +179,8 @@ neodata(主力)          hithink-fundmanager-selector(问财)   announcement-sea
         ▼
 ┌─────────────────────────────────────────────────────────┐
 │ Step 0: 前置准备                                        │
-│   • 加载 wb-finance-skill 读红线 + 数据源路由            │
+│   • 检测依赖 Skill 是否已安装(neodata/问财/公告搜索)     │
+│   • 未安装 → 询问用户是否自动从市场安装(见下方 §依赖自动安装) │
 │   • 读取 assets/manager-watchlist.json 解析名单          │
 │   • 解析用户输入(经理名/期数/扩展开关)                    │
 └─────────────────────────────────────────────────────────┘
@@ -251,6 +287,7 @@ neodata(主力)          hithink-fundmanager-selector(问财)   announcement-sea
 
 | 故障场景 | 处理方式 | 是否阻断 |
 |---|---|---|
+| 依赖 Skill 缺失(首次运行) | 检测缺失 Skill → 询问用户是否自动安装;neodata 必须安装,其余可降级 | ✅ neodata 阻断 / ❌ 其余降级 |
 | neodata 鉴权失败 | 按 SKILL.md 重试 1 次(connect_cloud_service);仍失败则切换问财 | ✅ 阻断 neodata 但不阻断整体 |
 | 经理未找到(neodata) | 利用问财辅助查询;仍空则标注"未找到" | ❌ 不阻断(跳过该经理) |
 | 经理未找到(neodata+问财均无) | 标注"未找到(两数据源均无数据)" | ❌ 不阻断(跳过该经理) |
